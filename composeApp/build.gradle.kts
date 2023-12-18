@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.apollo)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
@@ -160,5 +161,27 @@ apollo {
         // GraphQL configuration here.
         // https://www.apollographql.com/docs/kotlin/advanced/plugin-configuration/
         packageName.set("com.ailtontech.animeseas.graphql")
+    }
+}
+
+koverReport {
+    val coverageClassesExclusions = emptyList<String>()
+    val coveragePackagesExclusions = emptyList<String>()
+    val coverageAnnotationExclusions = emptyList<String>()
+
+    filters {
+        excludes {
+            packages(*coveragePackagesExclusions.toTypedArray())
+            classes(*coverageClassesExclusions.toTypedArray())
+            annotatedBy(*coverageAnnotationExclusions.toTypedArray())
+
+        }
+    }
+
+    verify {
+        rule {
+            minBound(30)
+        }
+
     }
 }
