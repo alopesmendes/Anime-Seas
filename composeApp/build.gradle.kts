@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.apollo)
     alias(libs.plugins.kover)
+    alias(libs.plugins.ktlint)
 }
 
 kotlin {
@@ -184,4 +185,21 @@ koverReport {
         }
 
     }
+}
+
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.JSON)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
+    }
+    filter {
+        include("**/*.kt")
+        exclude("**/build/**")
+    }
+
 }

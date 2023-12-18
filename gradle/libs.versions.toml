@@ -20,6 +20,7 @@ koin = "3.5.0"
 sqlDelight = "2.0.0"
 apollo = "4.0.0-beta.4"
 kover = "0.7.5"
+ktlint = "12.0.3"
 
 [libraries]
 
@@ -56,3 +57,4 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
