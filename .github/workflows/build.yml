@@ -12,9 +12,6 @@ on:
       shouldRunIos:
         required: true
         type: string
-      shouldRunDesktop:
-        required: true
-        type: string
 
 jobs:
   Android:
@@ -27,19 +24,7 @@ jobs:
       - name: Job set up
         uses: ./.github/actions/job-set-up
 
-      - run: ./gradlew :androidApp:assemble
-
-  Desktop:
-    if: ${{ inputs.shouldRunKmp == 'true' || inputs.shouldRunDesktop == 'true' }}
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Job set up
-        uses: ./.github/actions/job-set-up
-
-      - run: ./gradlew :desktopApp:assemble
+      - run: ./gradlew :composeApp:assemble
 
   iOS:
     if: ${{ inputs.shouldRunKmp == 'true' || inputs.shouldRunIos == 'true' }}
