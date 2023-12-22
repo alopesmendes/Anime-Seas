@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.apollo)
+    alias(libs.plugins.kover)
+    alias(libs.plugins.ktlint)
 }
 
 kotlin {
@@ -161,4 +163,43 @@ apollo {
         // https://www.apollographql.com/docs/kotlin/advanced/plugin-configuration/
         packageName.set("com.ailtontech.animeseas.graphql")
     }
+}
+
+koverReport {
+    val coverageClassesExclusions = emptyList<String>()
+    val coveragePackagesExclusions = emptyList<String>()
+    val coverageAnnotationExclusions = emptyList<String>()
+
+    filters {
+        excludes {
+            packages(*coveragePackagesExclusions.toTypedArray())
+            classes(*coverageClassesExclusions.toTypedArray())
+            annotatedBy(*coverageAnnotationExclusions.toTypedArray())
+
+        }
+    }
+
+    verify {
+        rule {
+            minBound(30)
+        }
+
+    }
+}
+
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.JSON)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
+    }
+    filter {
+        include("**/*.kt")
+        exclude("**/build/**")
+    }
+
 }
